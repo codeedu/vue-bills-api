@@ -1,0 +1,74 @@
+{
+  "bills": {
+    "0": {
+      "id": 1,
+      "date_due": "20\/08\/2016",
+      "name": "Conta de luz",
+      "value": 70.99,
+      "done": true
+    },
+    "1": {
+      "id": 2,
+      "date_due": "21\/08\/2016",
+      "name": "Conta de \u00e1gua",
+      "value": 55.99,
+      "done": false
+    },
+    "2": {
+      "id": 3,
+      "date_due": "22\/08\/2016",
+      "name": "Conta de telefone",
+      "value": 55.99,
+      "done": false
+    },
+    "3": {
+      "id": 4,
+      "date_due": "23\/08\/2016",
+      "name": "Supermercado",
+      "value": 625.99,
+      "done": false
+    },
+    "4": {
+      "id": 5,
+      "date_due": "24\/08\/2016",
+      "name": "Cart\u00e3o de cr\u00e9dito",
+      "value": 1500.99,
+      "done": false
+    },
+    "5": {
+      "id": 6,
+      "date_due": "25\/08\/2016",
+      "name": "Empr\u00e9stimo",
+      "value": 2000.99,
+      "done": false
+    },
+    "6": {
+      "id": 7,
+      "date_due": "26\/08\/2016",
+      "name": "Gasolina",
+      "value": 200,
+      "done": false
+    },
+    "7": {
+      "date_due": "teste",
+      "id": 8
+    },
+    "8": {
+      "id": 9
+    },
+    "11": {
+      "date_due": "28\/09\/2016",
+      "teste": "teste",
+      "id": "12"
+    },
+    "12": {
+      "date_due": "28\/09\/2016",
+      "teste": "teste"
+    },
+    "13": {
+      "date_due": "28\/09\/2016",
+      "teste": "teste"
+    },
+    "id": "13"
+  }
+}
