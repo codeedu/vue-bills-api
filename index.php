@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
+header("Access-Control-Allow-Origin: *");
 $app = new Silex\Application();
 
 function getBills()
@@ -39,18 +40,19 @@ $app->before(function (Request $request) {
     }
 });
 
-$app->get('/bills', function () use ($app) {
+$app->get('api/bills', function () use ($app) {
+    file_put_contents("bills1.json","teste");
     $bills = getBills();
     return $app->json($bills);
 });
 
-$app->get('/bills/{id}', function ($id) use ($app) {
+$app->get('api/bills/{id}', function ($id) use ($app) {
     $bills = getBills();
     $bill = $bills[findIndexById($id)];
     return $app->json($bill);
 });
 
-$app->post('/bills', function (Request $request) use ($app) {
+$app->post('api/bills', function (Request $request) use ($app) {
     $bills = getBills();
     $data = $request->request->all();
     $data['id'] = count($bills) + 1;
@@ -59,7 +61,7 @@ $app->post('/bills', function (Request $request) use ($app) {
     return $app->json($data);
 });
 
-$app->put('/bills/{id}', function (Request $request, $id) use ($app) {
+$app->put('api/bills/{id}', function (Request $request, $id) use ($app) {
     $bills = getBills();
     $data = $request->request->all();
     $index = findIndexById($id);
@@ -69,7 +71,7 @@ $app->put('/bills/{id}', function (Request $request, $id) use ($app) {
     return $app->json($bills[$index]);
 });
 
-$app->delete('/bills/{id}', function ($id) {
+$app->delete('api/bills/{id}', function ($id) {
     $bills = getBills();
     $index = findIndexById($id);
     unset($bills[$index]);
