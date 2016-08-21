@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\Response;
 require_once __DIR__ . '/vendor/autoload.php';
 
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 $app = new Silex\Application();
 
 function getBills()
@@ -41,9 +43,17 @@ $app->before(function (Request $request) {
 });
 
 $app->get('api/bills', function () use ($app) {
-    file_put_contents("bills1.json","teste");
     $bills = getBills();
     return $app->json($bills);
+});
+
+$app->get('api/bills/total', function () use ($app) {
+    $bills = getBills();
+    $sum=0;
+    foreach ($bills as $value) {
+        $sum += (float)$value['value'];
+    }
+    return $app->json(['total' => $sum]);
 });
 
 $app->get('api/bills/{id}', function ($id) use ($app) {
@@ -55,7 +65,7 @@ $app->get('api/bills/{id}', function ($id) use ($app) {
 $app->post('api/bills', function (Request $request) use ($app) {
     $bills = getBills();
     $data = $request->request->all();
-    $data['id'] = count($bills) + 1;
+    $data['id'] = rand(100,100000);
     $bills[] = $data;
     writeBills($bills);
     return $app->json($data);
@@ -74,10 +84,16 @@ $app->put('api/bills/{id}', function (Request $request, $id) use ($app) {
 $app->delete('api/bills/{id}', function ($id) {
     $bills = getBills();
     $index = findIndexById($id);
-    unset($bills[$index]);
+    array_splice($bills,$index,1);
     writeBills($bills);
     return new Response("", 204);
 });
+
+$app->match("{uri}", function($uri){
+    return "OK";
+})
+->assert('uri', '.*')
+->method("OPTIONS");
 
 
 $app->run();
